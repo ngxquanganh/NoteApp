@@ -28,6 +28,7 @@ public class RegisterFragment extends Fragment {
     EditText et_username;
     EditText et_password;
     EditText et_fullname;
+    EditText et_retype_password;
     Button btn_register;
 
 
@@ -51,6 +52,7 @@ public class RegisterFragment extends Fragment {
         et_username = view.findViewById(R.id.ET_username);
         et_password = view.findViewById(R.id.ET_password);
         btn_register = view.findViewById(R.id.button_register);
+        et_retype_password = view.findViewById(R.id.ET_retype_password);
 
 
         btn_register.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +62,11 @@ public class RegisterFragment extends Fragment {
                 String password = et_password.getText().toString();
                 String fullname = et_fullname.getText().toString();
                 if (username.isEmpty() || password.isEmpty() || fullname.isEmpty()){
+                    Toast.makeText( getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!password.equals(et_retype_password.getText().toString())){
+                    Toast.makeText( getContext(), "Password not match", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
