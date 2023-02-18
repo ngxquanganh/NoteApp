@@ -10,6 +10,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -41,5 +42,10 @@ public interface Interface {
     );
     @DELETE("notes/deletenote")
     Call<Void> deleteNote(@Query("id_note") int id_note);
+    @PUT("notes/updatenote2")
+    Call<Void> updateNote(
+            @Query("id_note") int id_note,
+            @Query("content") String content,
+            @Query("date_modify") String dateModify);
 
 }

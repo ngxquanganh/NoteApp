@@ -49,11 +49,12 @@ public class Note implements Serializable, Parcelable {
     public String getTitle() {
         return title;
     }
+    public void setDateModified(String dateModified){this.dateModified = dateModified;}
 
     public String getContent() {
         return content;
     }
-
+    public String getDateModified(){return dateModified;};
     public String getDateCreated() {
         return dateCreated.toString();
     }

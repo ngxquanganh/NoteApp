@@ -23,6 +23,8 @@ import com.example.noteapplication.network.Interface;
 import com.example.noteapplication.network.RetrofitClientInstance;
 import com.example.noteapplication.note.Note;
 
+import java.time.LocalDateTime;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -104,6 +106,46 @@ public class EditNoteFragment extends Fragment {
             });
         };
     });
+        btnSave.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String content = contentEditText.getText().toString();
+                String date_modify = LocalDateTime.now().toString(); // Get current date and time in string format
+
+                Interface apiService = RetrofitClientInstance.getRetrofitInstance().create(Interface.class);
+
+                Call<Void> call = apiService.updateNote(id_note, content, date_modify);
+
+                call.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            // Update successful, show a success message
+                            Toast.makeText(getContext(), "Update successful", Toast.LENGTH_SHORT).show();
+
+                            // Navigate back to MainFragment
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Navigate back to MainFragment after 2 seconds
+                                    Navigation.findNavController(view).navigate(R.id.action_editNoteFragment_to_mainFragment);
+                                }
+                            }, 2000); // Delay 2 seconds
+
+                        } else {
+                            // Update failed, show an error message
+                            Toast.makeText(getContext(), "Update failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        // Show an error message when the call fails
+                        Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
         return view;
     };
 }
