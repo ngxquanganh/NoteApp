@@ -11,15 +11,28 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.noteapplication.R;
 import com.example.noteapplication.network.ResponseNote;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder>{
+public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
 
     private ResponseNote responseNote;
     private List<Note> data;
 
     public NoteAdapter(List<Note> notes) {
         this.data = notes;
+    }
+    public interface OnNoteClickListener {
+        void onNoteClick(Note note);
+    }
+    private OnNoteClickListener mOnNoteClickListener;
+    private OnNoteClickListener onNoteClickListener;
+    public void setOnNoteClickListener(OnNoteClickListener listener) {
+        this.mOnNoteClickListener = listener;
+    }
+    public NoteAdapter(ArrayList<Note> data, OnNoteClickListener onNoteClickListener) {
+        this.data = data;
+        this.onNoteClickListener = onNoteClickListener;
     }
 
     @NonNull
@@ -32,17 +45,25 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
     @Override
     public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
         Note note = data.get(position);
-        if(note == null){
+        if (note == null) {
             return;
         }
         holder.titleOutput.setText(note.getTitle());
         holder.descriptionOutput.setText(note.getContent());
         holder.timeOutput.setText(note.getDateCreated());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnNoteClickListener != null) {
+                    mOnNoteClickListener.onNoteClick(note);
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        if(data != null){
+        if (data != null) {
             return data.size();
         }
         return 0;
@@ -61,4 +82,5 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
             timeOutput = itemView.findViewById(R.id.timeoutput);
         }
     }
+
 }

@@ -21,4 +21,12 @@ public class ResponseNote {
 
     @SerializedName("data")
     private List<Note> data;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public List<Note> getData() {
+        return data;
+    }
 }

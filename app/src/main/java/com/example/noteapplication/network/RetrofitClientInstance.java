@@ -6,7 +6,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClientInstance {
 
     private static Retrofit retrofit;
-
     private static final String BASE_URL = "http://raspianhnq.ddns.net:8080/";
 //    private static final String BASE_URL = "http://192.168.1.3:8080/";
 

@@ -5,10 +5,12 @@ import com.example.noteapplication.note.Note;
 import java.time.LocalDateTime;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface Interface {
@@ -37,4 +39,7 @@ public interface Interface {
             @Field("date_create") String dateCreate,
             @Field("date_modify") String dateModify
     );
+    @DELETE("notes/deletenote")
+    Call<Void> deleteNote(@Query("id_note") int id_note);
+
 }
