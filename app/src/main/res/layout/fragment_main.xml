@@ -11,10 +11,10 @@
         android:id="@+id/button_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="656dp"
+        android:layout_marginTop="612dp"
         android:text="logout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.292"
+        app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,8 +30,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
-        android:layout_width="367dp"
-        android:layout_height="605dp"
+        android:layout_width="380dp"
+        android:layout_height="539dp"
+        android:layout_margin="15dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notestitle" />
@@ -40,8 +42,8 @@
         android:id="@+id/addnewnotebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="656dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="612dp"
         android:text="Add new note"
         app:layout_constraintStart_toEndOf="@+id/button_logout"
         app:layout_constraintTop_toTopOf="parent" />

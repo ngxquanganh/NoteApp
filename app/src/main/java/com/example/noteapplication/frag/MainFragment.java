@@ -1,6 +1,7 @@
 package com.example.noteapplication.frag;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -33,12 +34,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements NoteAdapter.OnNoteClickListener {
 
     Button btn_logout;
     Button btn_add;
     private RecyclerView rcvNote;
-
+    List<Note> data = null;
     public MainFragment() {
         // Required empty public constructor
     }
@@ -79,7 +80,7 @@ public class MainFragment extends Fragment {
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_editNoteFragment);
+                Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_addNoteFragment);
             }
         });
 
@@ -113,18 +114,21 @@ public class MainFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseNote> call, Response<ResponseNote> response) {
                 System.out.println(response.code());
-                if(response.isSuccessful()){
 
-                    List<Note> data = response.body().getData();
+                if (response.isSuccessful()) {
+
+                    data = response.body().getData();
 
                     ResponseNote responseNote = response.body();
-                    if(responseNote.getStatus().equals("success")){
+                    if (responseNote.getStatus().equals("success")) {
                         rcvNote.setAdapter(new NoteAdapter(data));
                     }
-                }
-                else {
+                } else {
                     System.out.println("error");
                 }
+                NoteAdapter adapter = new NoteAdapter(data);
+                adapter.setOnNoteClickListener(MainFragment.this);
+                rcvNote.setAdapter(adapter);
             }
 
             @Override
@@ -138,4 +142,12 @@ public class MainFragment extends Fragment {
 
         });
     }
+
+    @Override
+    public void onNoteClick(Note note) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("note", note);
+        Navigation.findNavController(requireView()).navigate(R.id.action_mainFragment_to_editNoteFragment, bundle);
+    }
+
 }

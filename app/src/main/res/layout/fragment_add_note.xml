@@ -5,24 +5,23 @@
     android:id="@+id/frameLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".frag.EditNoteFragment" >
+    tools:context=".frag.AddNoteFragment" >
 
     <EditText
         android:id="@+id/ET_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_width="290dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="68dp"
         android:ems="10"
         android:hint="Note Title"
         android:inputType="textPersonName"
-        android:minHeight="48dp"
+        android:minHeight="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintHorizontal_bias="0.213"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:gravity="start"
         android:id="@+id/ET_content"
         android:layout_width="293dp"
         android:layout_height="365dp"
@@ -40,10 +39,10 @@
         android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="64dp"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintHorizontal_bias="0.283"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

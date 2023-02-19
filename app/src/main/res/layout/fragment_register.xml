@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".frag.RegisterFragment"  >
+    tools:context=".frag.RegisterFragment"    >
 
     <TextView
         android:id="@+id/textViewRegister"
@@ -54,31 +54,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:padding="10dp"
-        android:background="@drawable/et_style"
-        android:id="@+id/ET_retype_password"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:minHeight="48dp"
-        android:hint="Retype password"
-        android:textColorHint="#1a2b3c"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/button_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginBottom="124dp"
+        android:layout_marginBottom="200dp"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -87,7 +72,7 @@
         android:id="@+id/ET_fullname"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="410dp"
+        android:layout_marginTop="340dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
