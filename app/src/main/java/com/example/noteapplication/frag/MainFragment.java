@@ -27,6 +27,8 @@ import com.example.noteapplication.network.RetrofitClientInstance;
 import com.example.noteapplication.note.Note;
 import com.example.noteapplication.note.NoteAdapter;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -118,11 +120,11 @@ public class MainFragment extends Fragment implements NoteAdapter.OnNoteClickLis
                 if (response.isSuccessful()) {
 
                     data = response.body().getData();
-
-                    ResponseNote responseNote = response.body();
-                    if (responseNote.getStatus().equals("success")) {
-                        rcvNote.setAdapter(new NoteAdapter(data));
-                    }
+                    Collections.sort(data);
+//                    ResponseNote responseNote = response.body();
+//                    if (responseNote.getStatus().equals("success")) {
+//                        rcvNote.setAdapter(new NoteAdapter(data));
+//                    }
                 } else {
                     System.out.println("error");
                 }
