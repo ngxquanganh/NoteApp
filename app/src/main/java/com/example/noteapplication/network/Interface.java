@@ -47,5 +47,16 @@ public interface Interface {
             @Query("id_note") int id_note,
             @Query("content") String content,
             @Query("date_modify") String dateModify);
+    @PUT("notes/setpass")
+    Call<Void> setPass(
+            @Query("id_note") int id_note,
+            @Query("pass") String password
+    );
+
+    @PUT("notes/deletepass")
+    Call<Void> deletePass
+            (
+                    @Query("id_note") int id_note
+            );
 
 }

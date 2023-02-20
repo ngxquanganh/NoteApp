@@ -38,6 +38,12 @@ public class Note implements Serializable, Parcelable, Comparable<Note> {
     @SerializedName("content")
     private String content;
 
+    @SerializedName("isLocked")
+    private int isLocked;
+
+    @SerializedName("password")
+    private String password;
+
     public Note(int idUser, String title, String content, String dateCreated, String dateModified) {
         this.idUser = idUser;
         this.title = title;
@@ -102,5 +108,21 @@ public class Note implements Serializable, Parcelable, Comparable<Note> {
             return 1;
         }
         return 0;
+    }
+
+    public void setIsLocked(int isLocked) {
+        this.isLocked = isLocked;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isLocked() {
+        return isLocked == 1;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

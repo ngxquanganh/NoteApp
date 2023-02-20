@@ -1,8 +1,10 @@
 package com.example.noteapplication.note;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,9 +50,17 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         if (note == null) {
             return;
         }
+        if (note.isLocked()) {
+            holder.imageViewLock.setVisibility(View.VISIBLE);
+            holder.descriptionOutput.setText("This note is locked");
+            holder.descriptionOutput.setTextColor(Color.parseColor("#7c7d83"));
+        } else {
+            holder.imageViewLock.setVisibility(View.GONE);
+            holder.descriptionOutput.setText(note.getContent());
+        }
         holder.titleOutput.setText(note.getTitle());
-        holder.descriptionOutput.setText(note.getContent());
-        holder.timeOutput.setText(note.getDateCreated());
+
+        holder.timeOutput.setText(note.getDateModified().replace("T", " "));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,12 +84,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         private final TextView titleOutput;
         private final TextView descriptionOutput;
         private final TextView timeOutput;
+        private  ImageView imageViewLock;
 
         public NoteViewHolder(@NonNull View itemView) {
             super(itemView);
             titleOutput = itemView.findViewById(R.id.titleoutput);
             descriptionOutput = itemView.findViewById(R.id.descriptionoutput);
             timeOutput = itemView.findViewById(R.id.timeoutput);
+            imageViewLock = itemView.findViewById(R.id.imageView_lock);
         }
     }
 

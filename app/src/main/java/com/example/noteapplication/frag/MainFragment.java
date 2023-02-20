@@ -1,7 +1,6 @@
 package com.example.noteapplication.frag;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -18,16 +17,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.noteapplication.R;
+import com.example.noteapplication.ConfirmPwdDialog;
 import com.example.noteapplication.network.Interface;
-import com.example.noteapplication.network.ResponseJson;
 import com.example.noteapplication.network.ResponseNote;
 import com.example.noteapplication.network.RetrofitClientInstance;
 import com.example.noteapplication.note.Note;
 import com.example.noteapplication.note.NoteAdapter;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -121,10 +120,6 @@ public class MainFragment extends Fragment implements NoteAdapter.OnNoteClickLis
 
                     data = response.body().getData();
                     Collections.sort(data);
-//                    ResponseNote responseNote = response.body();
-//                    if (responseNote.getStatus().equals("success")) {
-//                        rcvNote.setAdapter(new NoteAdapter(data));
-//                    }
                 } else {
                     System.out.println("error");
                 }
@@ -147,6 +142,28 @@ public class MainFragment extends Fragment implements NoteAdapter.OnNoteClickLis
 
     @Override
     public void onNoteClick(Note note) {
+        if(note.isLocked())
+        {
+            ConfirmPwdDialog dialog = new ConfirmPwdDialog(getActivity(), note.getPassword());
+            dialog.setOnDialogResultListener(new ConfirmPwdDialog.OnDialogResultListener() {
+                @Override
+                public void onResult(boolean result) {
+                    if(result)
+                    {
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable("note", note);
+                        Navigation.findNavController(requireView()).navigate(R.id.action_mainFragment_to_editNoteFragment, bundle);
+                    }
+                    else
+
+                    {
+                        Toast.makeText(getContext(), "Wrong password", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            dialog.show();
+            return;
+        }
         Bundle bundle = new Bundle();
         bundle.putParcelable("note", note);
         Navigation.findNavController(requireView()).navigate(R.id.action_mainFragment_to_editNoteFragment, bundle);
